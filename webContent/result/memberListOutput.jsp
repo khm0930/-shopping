@@ -15,7 +15,8 @@
 			<%   for(int i=0; i<list.size(); i++){   
 			       MemberVO member = list.get(i);   %>
 			       
-			        <tr><td><%=member.getId() %></td>
+			        <tr>
+			        	<td><%=member.getId() %></td>
 			            <td><%=member.getPasswd() %></td>
 			            <td><%=member.getName() %></td>
 			            <td><%=member.getMail() %></td>

@@ -62,8 +62,8 @@ public class MemberVO {
 		return gender;
 	}
 
-	public void setgender(String mail) {
-		this.mail = gender;
+	public void setgender(String gender) {
+		this.gender = gender;
 	}
 
 }

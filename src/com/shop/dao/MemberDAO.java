@@ -61,9 +61,9 @@ public class MemberDAO {
 		try {
 			conn = connect();
 			pstmt = conn.prepareStatement("insert into member values(auto.nextval,?,?,?,?,?,?,?)");
-			pstmt.setString(1, member.getId());
-			pstmt.setString(2, member.getPasswd());
-			pstmt.setString(3, member.getName());
+			pstmt.setString(1, member.getName());
+			pstmt.setString(2, member.getId());
+			pstmt.setString(3, member.getPasswd());
 			pstmt.setString(4, member.getMail());
 			pstmt.setString(5, member.getaddress());
 			pstmt.setString(6, member.getphone());
@@ -85,18 +85,18 @@ public class MemberDAO {
 
 		try {
 			conn = connect();
-			pstmt = conn.prepareStatement("select * from member where id=?");
+			pstmt = conn.prepareStatement("select * from member where NAME_ID=?");
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				member = new MemberVO();
-				member.setId(rs.getString(1));
-				member.setPasswd(rs.getString(2));
-				member.setName(rs.getString(3));
-				member.setMail(rs.getString(4));
-				member.setaddress(rs.getString(5));
-				member.setphone(rs.getString(6));
-				member.setgender(rs.getString(7));
+				member.setName(rs.getString(2));
+				member.setId(rs.getString(3));
+				member.setPasswd(rs.getString(4));
+				member.setMail(rs.getString(5));
+				//member.setaddress(rs.getString(6));
+				//member.setphone(rs.getString(7));
+				//member.setgender(rs.getString(8));
 			}
 
 		} catch (Exception ex) {
@@ -114,7 +114,7 @@ public class MemberDAO {
 
 		try {
 			conn = connect();
-			pstmt = conn.prepareStatement("update member set passwd=?,name=?,mail=?,address=?,phone=?,gender=? where id=?");
+			pstmt = conn.prepareStatement("update member set password=?,name=?,mail=?,address=?,phone=?,gender=? where name_id=?");
 			pstmt.setString(1, member.getPasswd());
 			pstmt.setString(2, member.getName());
 			pstmt.setString(3, member.getMail());
@@ -138,9 +138,9 @@ public class MemberDAO {
 
 		try {
 			conn = connect();
-			pstmt = conn.prepareStatement("delete from member where id=?");
+			pstmt = conn.prepareStatement("delete from member where NAME_ID=?");
 			pstmt.setString(1, id);
-			pstmt.executeUpdate();
+			pstmt.executeUpdate(); 
 
 		} catch (Exception ex) {
 			System.out.println("delete error : " + ex);
@@ -152,11 +152,10 @@ public class MemberDAO {
 	public ArrayList<MemberVO> memberList() {
 
 		ArrayList<MemberVO> list = new ArrayList<MemberVO>();
-
+		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-
 		MemberVO member = null;
 
 		try {
@@ -165,9 +164,9 @@ public class MemberDAO {
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				member = new MemberVO();
-				member.setId(rs.getString(2));
-				member.setPasswd(rs.getString(3));
-				member.setName(rs.getString(4));
+				member.setName(rs.getString(2));
+				member.setId(rs.getString(3));
+				member.setPasswd(rs.getString(4));
 				member.setMail(rs.getString(5));
 				member.setaddress(rs.getString(6));
 				member.setphone(rs.getString(7));
