@@ -34,6 +34,13 @@ public class MemberVO {
 		this.name = name;
 	}
 
+	public String getMail() {
+		return mail;
+	}
+	
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
 	public String getaddress() {
 		return address;
 	}
@@ -50,13 +57,6 @@ public class MemberVO {
 		this.phone = phone;
 	}
 	
-	public String getMail() {
-		return mail;
-	}
-
-	public void setMail(String mail) {
-		this.mail = mail;
-	}
 	
 	public String getgender() {
 		return gender;
