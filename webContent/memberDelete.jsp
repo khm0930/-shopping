@@ -16,7 +16,7 @@ ${error}
 <% MemberVO member = (MemberVO)request.getAttribute("member");
    if(member != null) { %>
 		<h3>검색 정보 결과</h3>
-		${member.id } / ${member.passwd } / ${member.name } / ${member.mail } ${member.address } ${member.phone } ${member.gender } <p>
+		${member.id } / ${member.passwd } / ${member.name } / ${member.mail } / ${member.address } / ${member.phone } / ${member.gender } <p>
 	
 	    <form action="memberDelete.do" method="post">
 	       <input type="hidden" name="id"  value="${member.id}" />

@@ -94,9 +94,9 @@ public class MemberDAO {
 				member.setId(rs.getString(3));
 				member.setPasswd(rs.getString(4));
 				member.setMail(rs.getString(5));
-				//member.setaddress(rs.getString(6));
-				//member.setphone(rs.getString(7));
-				//member.setgender(rs.getString(8));
+				member.setaddress(rs.getString(6));
+				member.setphone(rs.getString(7));
+				member.setgender(rs.getString(8));
 			}
 
 		} catch (Exception ex) {

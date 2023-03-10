@@ -5,7 +5,7 @@
 </head>
 <body>
 <!--출력 뷰 페이지  -->
-<h3> ${id} 님 가입이 완료되었습니다! </h3>
-<a href="/dev/login.jsp"> 로그인화면으로 이동</a>
+<h3> ${id} 님 로그인 완료 되었습니다.! </h3>
+<%@ include file="home.jsp" %> 
 </body>
 </html>

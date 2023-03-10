@@ -13,7 +13,7 @@
 	    }else{
 	%>
 		    <h3>
-			${member.id } / ${member.passwd } / ${member.name } / ${member.mail }
+			${member.id } / ${member.passwd } / ${member.name } / ${member.mail } / ${member.address } / ${member.phone } / ${member.gender }
 			</h3>
     <%} %>
     
