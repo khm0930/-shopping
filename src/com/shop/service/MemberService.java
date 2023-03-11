@@ -37,5 +37,6 @@ public class MemberService {
 		ArrayList<MemberVO> list = dao.memberList();
 		return list;
 	}
+	
 
 }
