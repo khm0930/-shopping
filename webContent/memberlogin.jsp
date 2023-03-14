@@ -8,7 +8,7 @@
 
 ${error}																 <!--오류가 발생하여 현재 페이지로 다시 돌아올때 오류 메시지를 출력하는 코드  -->
 <!--입력 뷰  -->
-<form action="login"  method="post">							<!-- 폼에서 입력받은 값을 처리할 서버 프로그램으로 memberInsert.do를 지정 요청방식은 post  -->
+<form action="memberlogin.do"  method="post">							<!-- 폼에서 입력받은 값을 처리할 서버 프로그램으로 memberInsert.do를 지정 요청방식은 post  -->
 
 	
 	ID : <input type="text"  name="id" > <br>

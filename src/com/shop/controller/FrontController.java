@@ -23,6 +23,7 @@ public class FrontController extends HttpServlet {    //컨트롤러를 서블�
 		list.put("/memberUpdate.do", new MemberUpdateController());
 		list.put("/memberDelete.do", new MemberDeleteController());
 		list.put("/memberList.do", new MemberListController());
+		list.put("/memberlogin.do", new LoginController());
 
 	}
 
@@ -35,7 +36,8 @@ public class FrontController extends HttpServlet {    //컨트롤러를 서블�
 		String contextPath = request.getContextPath();
 		String path = url.substring(contextPath.length());
 
-		Controller subController = list.get(path); 		
+		Controller subController = list.get(path); 	
 		subController.execute(request, response);		//controll 인터페이스 상속 받아 작성하도록 규정 따라서 execute() 메소드를 재정의 하여 controllr 기능 구현
+		
 	}
 }

@@ -182,5 +182,33 @@ public class MemberDAO {
 
 		return list;
 	}
+
+
+	public String memberLogin(String id, String password) {
+		
+		String name = null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		MemberVO member = null;
+
+		try {
+			conn = connect();
+			pstmt = conn.prepareStatement("select name from member where NAME_ID=? AND password = ?");
+			pstmt.setString(1, id);
+			pstmt.setString(2, password);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				name = rs.getString("name");
+			}
+
+		} catch (Exception ex) {
+			System.out.println("search error : " + ex);
+		} finally {
+			close(conn, pstmt, rs);
+		}
+
+		return name;
+	}
 	
 }

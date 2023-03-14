@@ -10,8 +10,6 @@ public class MemberService {
 	private static MemberService service = new MemberService();
 	public MemberDAO dao = MemberDAO.getInstance();
 	
-	private MemberService(){}
-
 	public static MemberService getInstance() {
 		return service;
 	}
@@ -38,5 +36,11 @@ public class MemberService {
 		return list;
 	}
 	
+	public MemberVO memberLogin(String id) {
+		MemberVO member = dao.memberSearch(id);
+		return member;
+	}
+	
 
 }
+
