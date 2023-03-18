@@ -66,7 +66,7 @@ public class ItemDAO {
 
 		try {
 			conn = connect();
-			pstmt = conn.prepareStatement("SELECT * FROM item");
+			pstmt = conn.prepareStatement("select * from item");
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				item = new ItemVO();
