@@ -36,8 +36,8 @@ public class MemberService {
 		return list;
 	}
 	
-	public MemberVO memberLogin(String id) {
-		MemberVO member = dao.memberSearch(id);
+	public MemberVO memberLogin(String id, String pwd) {
+		MemberVO member = dao.memberLogin(id,pwd);
 		return member;
 	}
 	

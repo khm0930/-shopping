@@ -184,7 +184,7 @@ public class MemberDAO {
 	}
 
 
-	public String memberLogin(String id, String password) {
+	public MemberVO memberLogin(String id, String password) {
 		
 		String name = null;
 		Connection conn = null;
@@ -194,12 +194,19 @@ public class MemberDAO {
 
 		try {
 			conn = connect();
-			pstmt = conn.prepareStatement("select name from member where NAME_ID=? AND password = ?");
+			pstmt = conn.prepareStatement("select * from member where NAME_ID=? AND password = ?");
 			pstmt.setString(1, id);
 			pstmt.setString(2, password);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				name = rs.getString("name");
+				member = new MemberVO();
+				member.setName(rs.getString(2));
+				member.setId(rs.getString(3));
+				member.setPasswd(rs.getString(4));
+				member.setMail(rs.getString(5));
+				member.setaddress(rs.getString(6));
+				member.setphone(rs.getString(7));
+				member.setgender(rs.getString(8));
 			}
 
 		} catch (Exception ex) {
@@ -208,7 +215,7 @@ public class MemberDAO {
 			close(conn, pstmt, rs);
 		}
 
-		return name;
+		return member;
 	}
 	
 }
