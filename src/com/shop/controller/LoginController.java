@@ -1,9 +1,9 @@
 package com.shop.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,7 +12,9 @@ import com.shop.service.MemberService;
 import com.shop.vo.MemberVO;
 
 public class LoginController implements Controller {
-    @Override
+    private ServletRequest session;
+
+	@Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	// TODO Auto-generated method stub
     	String id = request.getParameter("id");
@@ -31,13 +33,14 @@ public class LoginController implements Controller {
 		
 		MemberService loginservice = MemberService.getInstance();
 		MemberVO member = loginservice.memberLogin(id,passwd);
-		MemberDAO memberDAO = MemberDAO.getInstance();
-	
+		
 		
 		//로그인이 성공 되면 member 객체가 넘어오고 실패하면 null이 넘어옴
 	
+		//session = null;
 		
 		if (member == null) request.setAttribute("result", "아이디나 비밀번호를 다시 입력하세요.");
+		//session.setAttribute("member",member);
 		request.setAttribute("member", member);
 		//if (result==-2) request.setAttribute("result", "아이디나 비밀번호를 다시 입력하세요.");
 		//request.setAttribute("member", member);

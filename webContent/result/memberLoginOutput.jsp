@@ -20,11 +20,11 @@
        }else{
    %>
           <h3>
-         ${member.id} 님 로그인 성공 !
+         ${member.id} 님 로그인 성공 ! <p>
+         <a href="itemList.do">상품 목록 이동</a>
          </h3>
     <%} %>
     <p>
-    <%@ include file="home.jsp" %>    
 </head>
 <body>
 

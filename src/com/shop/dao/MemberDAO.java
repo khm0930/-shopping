@@ -59,6 +59,8 @@ public class MemberDAO {
 		PreparedStatement pstmt = null;
 
 		try {
+			
+			
 			conn = connect();
 			pstmt = conn.prepareStatement("insert into member values(auto.nextval,?,?,?,?,?,?,?)");
 			pstmt.setString(1, member.getName());
@@ -217,5 +219,37 @@ public class MemberDAO {
 
 		return member;
 	}
+	public int memberIdCheck(String id) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		MemberVO member = null;
+		int idCheck = 1;
+		
+		try {
+			conn = connect();
+			pstmt = conn.prepareStatement("select * from member where NAME_ID=?");
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if (rs.next() || id.equals("")) {
+				idCheck = 0;
+			}
+			else {
+				idCheck=1;
+			}
+
+		} catch (Exception ex) {
+			System.out.println("idCheck error : " + ex);
+		} finally {
+			close(conn, pstmt, rs);
+		}
+
+		return idCheck;
+	}
+
+	
+	
+	
+	
 	
 }

@@ -24,6 +24,7 @@ public class FrontController extends HttpServlet {    //컨트롤러를 서블�
 		list.put("/memberDelete.do", new MemberDeleteController());
 		list.put("/memberList.do", new MemberListController());
 		list.put("/memberlogin.do", new LoginController());
+		list.put("/itemList.do", new ItemAddController());
 
 	}
 

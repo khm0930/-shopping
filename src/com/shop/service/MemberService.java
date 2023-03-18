@@ -40,7 +40,10 @@ public class MemberService {
 		MemberVO member = dao.memberLogin(id,pwd);
 		return member;
 	}
-	
+	public int checkIdService(String id) {
+		int member = dao.memberIdCheck(id);
+		return member;
+	}
 
 }
 
