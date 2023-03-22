@@ -29,8 +29,6 @@ public class MemberInsertController implements Controller {
 		// VO 객체에 데이터 바인딩(저장)
 		MemberVO member = new MemberVO(); 
 		
-		
-		
 		member.setId(id); //클라이언트로부터 전달된 입력값들을 setter 메소드를 호출하여 MemberVO 객체의 멤버변수에 저장
 		member.setPasswd(passwd);
 		member.setName(name);
@@ -38,17 +36,15 @@ public class MemberInsertController implements Controller {
 		member.setaddress(address);
 		member.setphone(phone);
 		member.setgender(gender);
+		
+		
 
 		// Service 객체의 메소드 호출
 		MemberService service = MemberService.getInstance();  	//회원 관리 서비스를 처리하는 모델인 MemberService 객체를 추출한후 회원정보 생성 서비스를 처리하는 memberInsert() 메소드를 호출 
 		service.memberInsert(member);
-		int checkId = service.checkIdService(id);
-		if(checkId == 0) {
-			System.out.println("yes");
-		}
-		else{
-			System.out.println("no");
-		}
+		
+		
+		
 
 		// Output View 페이지로 이동
 		request.setAttribute("id", id); 		// id 값을 저장한후 페이지 이동

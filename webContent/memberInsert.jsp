@@ -12,8 +12,10 @@ ${error}																 <!--오류가 발생하여 현재 페이지로 다시 �
 
 	이름 : <input type="text" name="name"> <br>
 	ID : <input type="text"  name="id" maxlength="30" onkeydown="inputIdChk()" >  <!-- 온키 다운은 중복체크를 하고난뒤 다시 아이디를 입력했을 경우를 대처하기 위함 -->
-	<input type="button" value="중복확인" onclik="openIdChk()"> <br>
-	<input type="hidden" name="idDuplication" value="idUncheck">
+	<button type="button" onClick="fn_daCheckId()" name="dbCheckId" class="checkId">
+    중복 확인
+    </button>
+    <input type="hidden" name="idDuplication" value = "idUncheck"/> <br>
 	비밀번호 : <input type="password"  name="passwd" ><br>
 	E-Mail : <input type="text" name="mail" > <br>
 	주소 : <input type="text" name="address" > <br>

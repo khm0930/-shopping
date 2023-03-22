@@ -12,15 +12,16 @@ public class MemberUpdateController implements Controller {
 
 		// Parameter ����
 		String id = request.getParameter("id");
-		String passwd = request.getParameter("passwd");
+		String nowpasswd = request.getParameter("nowpasswd");
+		String newpasswd = request.getParameter("newpasswd");
 		String name = request.getParameter("name");
 		String mail = request.getParameter("mail");
 		String address = request.getParameter("address");
 		String phone = request.getParameter("phone");
 		String gender = request.getParameter("gender");
 		// ��ȿ�� üũ
-		if (id.isEmpty() || passwd.isEmpty() || name.isEmpty() || mail.isEmpty() || address.isEmpty()|| phone.isEmpty()) {
-			request.setAttribute("error", "모든 항목을 빠짐없이 입력해주시기 바랍니다eee.");
+		if (id.isEmpty() || nowpasswd.isEmpty() || name.isEmpty() || mail.isEmpty() || address.isEmpty()|| phone.isEmpty()|| newpasswd.isEmpty()) {
+			request.setAttribute("error", "모든 항목을 빠짐없이 입력해주시기 바랍니다.");
 			HttpUtil.forward(request, response, "/memberUpdate.jsp");
 			return;
 		}
@@ -28,7 +29,7 @@ public class MemberUpdateController implements Controller {
 		// VO��ü�� ����Ÿ ���ε�
 		MemberVO member = new MemberVO();
 		member.setId(id);
-		member.setPasswd(passwd);
+		member.setPasswd(newpasswd);
 		member.setName(name);
 		member.setMail(mail);
 		member.setaddress(address);

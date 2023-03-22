@@ -1,6 +1,9 @@
 package com.shop.dao;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import com.shop.vo.MemberVO;
@@ -78,17 +81,17 @@ public class MemberDAO {
 		}
 	}
 
-	public MemberVO memberSearch(String id) {
+	public MemberVO memberSearch(String id,String password) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-
 		MemberVO member = null;
 
 		try {
 			conn = connect();
-			pstmt = conn.prepareStatement("select * from member where NAME_ID=?");
+			pstmt = conn.prepareStatement("select * from member where NAME_ID=? AND password = ?");
 			pstmt.setString(1, id);
+			pstmt.setString(2, password);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				member = new MemberVO();
@@ -248,8 +251,6 @@ public class MemberDAO {
 	}
 
 	
-	
-	
-	
+
 	
 }

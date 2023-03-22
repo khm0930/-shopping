@@ -12,6 +12,7 @@ public class MemberSearchController implements Controller {
 
 		// Parameter ����
 		String id = request.getParameter("id");
+		String nowpasswd = request.getParameter("nowpasswd");
 		String job = request.getParameter("job");
 
 		String path = null;
@@ -23,15 +24,16 @@ public class MemberSearchController implements Controller {
 			path = "/memberDelete.jsp";	
 		
 		// ��ȿ�� üũ
-		if (id.isEmpty()) {
-			request.setAttribute("error", "ID를 입력해주시기 바랍니다.");
+		if (id.isEmpty()||nowpasswd.isEmpty()) {
+			request.setAttribute("error", "ID 와 password를 입력해주시기 바랍니다.");
 			HttpUtil.forward(request, response, path);
 			return;
 		}
+		
 
 		// Service ��ü�� �޼��� ȣ��
 		MemberService service = MemberService.getInstance();
-		MemberVO member = service.memberSearch(id);
+		MemberVO member = service.memberSearch(id,nowpasswd);
 
 
 		// Output View �������� �̵�

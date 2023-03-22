@@ -18,8 +18,8 @@ public class MemberService {
 		dao.memberInsert(member);
 	}
 
-	public MemberVO memberSearch(String id) {
-		MemberVO member = dao.memberSearch(id);
+	public MemberVO memberSearch(String id,String pwd) {
+		MemberVO member = dao.memberSearch(id,pwd);
 		return member;
 	}
 

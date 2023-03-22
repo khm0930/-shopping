@@ -34,12 +34,10 @@ public class LoginController implements Controller {
 		MemberService loginservice = MemberService.getInstance();
 		MemberVO member = loginservice.memberLogin(id,passwd);
 		
-		
-		//로그인이 성공 되면 member 객체가 넘어오고 실패하면 null이 넘어옴
-	
-		//session = null;
-		
 		if (member == null) request.setAttribute("result", "아이디나 비밀번호를 다시 입력하세요.");
+		//로그인이 성공 되면 member 객체가 넘어오고 실패하면 null이 넘어옴
+		
+		//session = null;
 		//session.setAttribute("member",member);
 		request.setAttribute("member", member);
 		//if (result==-2) request.setAttribute("result", "아이디나 비밀번호를 다시 입력하세요.");
