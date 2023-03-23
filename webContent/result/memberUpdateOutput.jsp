@@ -6,6 +6,6 @@
 <body>
 <h3> ${id} 님 정보 수정이 완료되었습니다! </h3>
 
-<%@ include file="home.jsp" %> 
+<a href="memberlogin.jsp"> 로그인화면으로 이동</a> <br>
 </body>
 </html>

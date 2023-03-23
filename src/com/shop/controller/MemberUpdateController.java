@@ -20,7 +20,7 @@ public class MemberUpdateController implements Controller {
 		String phone = request.getParameter("phone");
 		String gender = request.getParameter("gender");
 		// ��ȿ�� üũ
-		if (id.isEmpty() || nowpasswd.isEmpty() || name.isEmpty() || mail.isEmpty() || address.isEmpty()|| phone.isEmpty()|| newpasswd.isEmpty()) {
+		if (id.isEmpty() ||  name.isEmpty() || mail.isEmpty() || address.isEmpty()|| phone.isEmpty()|| nowpasswd.isEmpty()|| newpasswd.isEmpty()) {
 			request.setAttribute("error", "모든 항목을 빠짐없이 입력해주시기 바랍니다.");
 			HttpUtil.forward(request, response, "/memberUpdate.jsp");
 			return;
@@ -29,7 +29,8 @@ public class MemberUpdateController implements Controller {
 		// VO��ü�� ����Ÿ ���ε�
 		MemberVO member = new MemberVO();
 		member.setId(id);
-		member.setPasswd(newpasswd);
+		member.setnowPasswd(nowpasswd);
+		member.setnewPasswd(newpasswd);
 		member.setName(name);
 		member.setMail(mail);
 		member.setaddress(address);

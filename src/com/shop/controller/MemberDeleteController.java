@@ -11,10 +11,11 @@ public class MemberDeleteController implements Controller {
 
 		// Parameter ����
 		String id = request.getParameter("id");
+		String nowpasswd = request.getParameter("nowpasswd");
 
 		// Service ��ü�� �޼��� ȣ��
 		MemberService service = MemberService.getInstance();
-		service.memberDelete(id);
+		service.memberDelete(id,nowpasswd);
 
 		// Output View �������� �̵�
 		HttpUtil.forward(request, response, "/result/memberDeleteOutput.jsp");

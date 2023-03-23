@@ -30,7 +30,7 @@ public class MemberInsertController implements Controller {
 		MemberVO member = new MemberVO(); 
 		
 		member.setId(id); //클라이언트로부터 전달된 입력값들을 setter 메소드를 호출하여 MemberVO 객체의 멤버변수에 저장
-		member.setPasswd(passwd);
+		member.setnowPasswd(passwd);
 		member.setName(name);
 		member.setMail(mail);
 		member.setaddress(address);

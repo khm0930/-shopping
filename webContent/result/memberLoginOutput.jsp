@@ -20,8 +20,9 @@
        }else{
    %>
           <h3>
-         ${member.id} 님 로그인 성공 ! <p>
+         ${member.id} 님 로그인 완료 <p>
          <a href="memberUpdate.jsp">회원 정보 수정</a> <p>
+         <a href="memberDelete.jsp">회원 탈퇴</a> <p>
          <a href="itemList.do">상품 목록 이동</a>
          </h3>
     <%} %>

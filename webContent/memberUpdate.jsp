@@ -11,7 +11,7 @@ ${error}
 
 <form action="memberSearch.do" method="post">
    ID : <input type="text"  name="id" /><br>
-    PWD : <input type="password"  name="nowpasswd" ><br>
+   PWD : <input type="password"  name="nowpasswd" ><br>
   <input type="hidden" name="job" value="update" />
   <input type="submit"  value="검색" />
 </form>
@@ -23,8 +23,8 @@ ${error}
 		<h3>회원 정보 수정 </h3>
 		<form action="memberUpdate.do"  method="post">
 			ID : <input type="text"  name="id" readonly  value="${member.id}"  > <br>
-			현재 비밀번호 : <input type="password"  name="now passwd" ><br>
-			변경 비밀번호 : <input type="password"  name="new passwd" ><br>
+			현재 비밀번호 : <input type="password"  name="nowpasswd" ><br>
+			변경 비밀번호 : <input type="password"  name="newpasswd" ><br>
 			이름 : <input type="text" name="name" value="${member.name}"> <br>
 			E-Mail : <input type="text" name="mail" value="${member.mail}"> <br>
 			주소 : <input type="text" name="address" value="${member.address}"> <br>

@@ -4,7 +4,8 @@ public class MemberVO {
 	
 	private String name;
 	private String id; 
-	private String passwd; 
+	private String nowpasswd;
+	private String newpasswd;
 	private String mail;
 	private String address;
 	private String phone;
@@ -18,12 +19,20 @@ public class MemberVO {
 		this.id = id;
 	}
 
-	public String getPasswd() {
-		return passwd;
+	public String getnowPasswd() {
+		return nowpasswd;
 	}
 
-	public void setPasswd(String passwd) {
-		this.passwd = passwd;
+	public void setnowPasswd(String passwd) {
+		this.nowpasswd = passwd;
+	}
+	
+	public String getnewPasswd() {
+		return newpasswd;
+	}
+
+	public void setnewPasswd(String passwd) {
+		this.newpasswd = passwd;
 	}
 
 	public String getName() {

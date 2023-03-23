@@ -68,7 +68,7 @@ public class MemberDAO {
 			pstmt = conn.prepareStatement("insert into member values(auto.nextval,?,?,?,?,?,?,?)");
 			pstmt.setString(1, member.getName());
 			pstmt.setString(2, member.getId());
-			pstmt.setString(3, member.getPasswd());
+			pstmt.setString(3, member.getnowPasswd());
 			pstmt.setString(4, member.getMail());
 			pstmt.setString(5, member.getaddress());
 			pstmt.setString(6, member.getphone());
@@ -97,7 +97,7 @@ public class MemberDAO {
 				member = new MemberVO();
 				member.setName(rs.getString(2));
 				member.setId(rs.getString(3));
-				member.setPasswd(rs.getString(4));
+				member.setnowPasswd(rs.getString(4));
 				member.setMail(rs.getString(5));
 				member.setaddress(rs.getString(6));
 				member.setphone(rs.getString(7));
@@ -120,7 +120,7 @@ public class MemberDAO {
 		try {
 			conn = connect();
 			pstmt = conn.prepareStatement("update member set password=?,name=?,mail=?,address=?,phone=?,gender=? where name_id=?");
-			pstmt.setString(1, member.getPasswd());
+			pstmt.setString(1, member.getnewPasswd());
 			pstmt.setString(2, member.getName());
 			pstmt.setString(3, member.getMail());
 			pstmt.setString(4, member.getaddress());
@@ -137,14 +137,15 @@ public class MemberDAO {
 
 	}
 
-	public void memberDelete(String id) {
+	public void memberDelete(String id,String password) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 
 		try {
 			conn = connect();
-			pstmt = conn.prepareStatement("delete from member where NAME_ID=?");
+			pstmt = conn.prepareStatement("delete from member where NAME_ID=? AND password=?");
 			pstmt.setString(1, id);
+			pstmt.setString(2, password);
 			pstmt.executeUpdate(); 
 
 		} catch (Exception ex) {
@@ -171,7 +172,7 @@ public class MemberDAO {
 				member = new MemberVO();
 				member.setName(rs.getString(2));
 				member.setId(rs.getString(3));
-				member.setPasswd(rs.getString(4));
+				member.setnowPasswd(rs.getString(4));
 				member.setMail(rs.getString(5));
 				member.setaddress(rs.getString(6));
 				member.setphone(rs.getString(7));
@@ -207,7 +208,7 @@ public class MemberDAO {
 				member = new MemberVO();
 				member.setName(rs.getString(2));
 				member.setId(rs.getString(3));
-				member.setPasswd(rs.getString(4));
+				member.setnowPasswd(rs.getString(4));
 				member.setMail(rs.getString(5));
 				member.setaddress(rs.getString(6));
 				member.setphone(rs.getString(7));
