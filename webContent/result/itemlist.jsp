@@ -49,16 +49,10 @@ function fnCalCount(type){
 			<td><%=item.getSize() %></td>
 			
 			<td>
-				<!--<button type="button" onclick="fnCalCount('plus');" value='+'>+</button>
-				<input type="text" name="pop_out" value="0" readonly="readonly" style="text-align:center;"/>
-				<span id='result'>0</span>
-				<button type="button" onclick="fnCalCount('minus');" value='-'>-</button>-->
-				
-				<input type = "number" min = "0" max="10" step="0">
-
+				<input type = "number" name = "count" min = "0" max="10" step="0" value = "0">
+	
 			</td>
 			
-
 		</tr>
 			
 		<%   }
@@ -67,7 +61,8 @@ function fnCalCount(type){
        }
 	%>
 	</table>
-<table border="1">
+			<button type="button" onclick="fnCalCount('minus');" value='add'>장바구니에 담기</button>
+
 
 </body>
 </html>

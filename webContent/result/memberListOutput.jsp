@@ -17,7 +17,7 @@
 			       
 			        <tr>
 			        	<td><%=member.getId() %></td>
-			            <td><%=member.getPasswd() %></td>
+			            <td><%=member.getnowPasswd() %></td>
 			            <td><%=member.getName() %></td>
 			            <td><%=member.getMail() %></td>
 			            <td><%=member.getaddress() %></td>

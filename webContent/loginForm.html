@@ -1,28 +1,48 @@
-<section id="loginFormArea">
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="utf-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>제품 페이지</title>
+</head>
+<body>
+<%
+request.setCharacterEncoding("utf-8");
+String name = request.getParameter("name");
 
-<h1>LOGIN</h1>
-<form action="login" method="post">
-	<fieldset>
-	<table>
-	<tr>	
-		<td class="td_left">
-		<label for="id">id:</label>
-		</td>
-		
-		<td class="td_ right">
-		<input type="text" name="id" id="id"/>
-		</td>
-	</tr>
-	<tr>	
-		<td class="td_left">
-		<label for="passwd">pwd:</label>
-		</td>	
-		<td class="td_ right">
-		<input type="password" name="passwd" id="passwd"/>
-		</td>
-	</tr>
-	</table>
-	<input type="submit" value="login" id="selectButton"/>
-	</fieldset>
+//이름이 ""이면 돌려보냄
+if(name == ""){
+	out.println("<script>alert('이름을 입력해주세요.');</script>");
+	out.println("<script>location.href='Login.jsp'</script>");
+}
+
+//세션에 login이 없다면 등록
+if(session.getAttribute("login") == null){
+	session.setAttribute("login", name);
+}
+%>
+
+<center>
+
+<h3>제품 페이지</h3>
+<hr/>
+<%= session.getAttribute("login") %>님이 로그인 한 상태입니다. <br/>
+<hr/>
+<form action="add.jsp">
+	<select name="fruit">
+	    <option>Apple</option>
+	    <option>Kiwi</option>
+	    <option>Mango</option>
+	    <option>Pineapple</option>
+	</select>
+	<input type="submit" value="담기">
 </form>
-</section>
+
+<br/>
+<a href="checkOut.jsp">계산</a>
+
+</center>
+
+</body>
+</html>
