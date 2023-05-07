@@ -7,7 +7,7 @@
 <title>로그인 결과</title>
 
    
-   <%
+   <%	
        String result = (String)request.getAttribute("result");
    // request에 result 이름으로 등록된 정보를 추출
    // result 정보는 데이터베이스의 member 테이블에 추출된 회원정보가 없을 때 등록되는 정보
@@ -21,6 +21,7 @@
    %>
           <h3>
          ${member.id} 님 로그인 완료 <p>
+         <a href="memberLogOut.jsp">로그아웃</a> <p>
          <a href="memberUpdate.jsp">회원 정보 수정</a> <p>
          <a href="memberDelete.jsp">회원 탈퇴</a> <p>
          <a href="itemList.do">상품 목록 이동</a>

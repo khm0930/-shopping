@@ -7,7 +7,8 @@
 <title>로그아웃</title>
 </head>
 <body>
-session.invalidate();
-response.sendRedirect("memberlogin.jsp");
+	<% session.invalidate(); %>
+	<a href="memberlogin.jsp">로그인 하기</a> <p><br>
+	<a href="memberInsert.jsp">회원 가입</a> <p>
 </body>
 </html>

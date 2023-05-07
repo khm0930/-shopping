@@ -9,11 +9,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.shop.service.ItemService;
 import com.shop.vo.ItemVO;
+import com.shop.vo.MemberVO;
 
-public class ItemAddController implements Controller {
+public class ItemlistController implements Controller {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ItemService service = ItemService.getInstance();
 		ArrayList<ItemVO> list = service.ItemList();
+		
+		String name = request.getParameter("name");
+		ItemVO item = new ItemVO();
+		
+		item.setName(name);
+		
 
 		request.setAttribute("list", list);
 		HttpUtil.forward(request, response, "/result/itemlist.jsp");

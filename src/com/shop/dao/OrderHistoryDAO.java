@@ -13,12 +13,12 @@ import com.shop.vo.OrderDetailVO;
 import com.shop.vo.OrderHistoryVO;
 import com.shop.vo.OrderVO;
 
-public class MemberItemDAO {
+public class OrderHistoryDAO {
 
-	private static MemberItemDAO dao = new MemberItemDAO();
-	private MemberItemDAO(){}
+	private static OrderHistoryDAO dao = new OrderHistoryDAO();
+	private OrderHistoryDAO(){}
 
-	public static MemberItemDAO getInstance() {
+	public static OrderHistoryDAO getInstance() {
 		return dao;
 	}
 
@@ -84,23 +84,23 @@ public class MemberItemDAO {
 	}
 
 
-	public ArrayList<OrderDetailVO> Orders_form() {
+	public ArrayList<OrderHistoryVO> Orders_form() {
 
-		ArrayList<OrderDetailVO> list = new ArrayList<OrderDetailVO>();
+		ArrayList<OrderHistoryVO> list = new ArrayList<OrderHistoryVO>();
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		OrderDetailVO item = null;
+		OrderHistoryVO item = null;
 
 		try {
 			conn = connect();
 			pstmt = conn.prepareStatement("select * from item NATURAL JOIN Orders_form NATURAL JOIN Orders");
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				item = new OrderDetailVO();
-				//item.setitem_name(rs.getString(1)); //orderdetailvo에 아직 추가 안했음
-				//item.setitem_size(rs.getString(2));
+				item = new OrderHistoryVO();
+				item.setitem_name(rs.getString(1)); //orderdetailvo에 아직 추가 안했음
+				item.setitem_size(rs.getString(2));
 				item.setcount(rs.getInt(3));
 				list.add(item);
 

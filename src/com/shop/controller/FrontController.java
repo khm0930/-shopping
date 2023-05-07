@@ -1,9 +1,14 @@
 package com.shop.controller;
 
-import java.io.*;
-import javax.servlet.*;
-import javax.servlet.http.*;
-import java.util.*;
+import java.io.IOException;
+import java.util.HashMap;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 public class FrontController extends HttpServlet {    //컨트롤러를 서블릿으로 개발하는것은 mvc 모델 2의 구조로 개발 ,jsp로 개발하는것은 mvc  모델1 개발
 
@@ -24,7 +29,8 @@ public class FrontController extends HttpServlet {    //컨트롤러를 서블�
 		list.put("/memberDelete.do", new MemberDeleteController());
 		list.put("/memberList.do", new MemberListController());
 		list.put("/memberlogin.do", new LoginController());
-		list.put("/itemList.do", new ItemAddController());
+		list.put("/itemList.do", new ItemlistController());
+		list.put("/orderform.do", new OrderDetailController());
 
 	}
 
@@ -32,7 +38,6 @@ public class FrontController extends HttpServlet {    //컨트롤러를 서블�
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {  //클라이언트로부터 요청이 들어올때마다 실행하는 메소드
 
 		request.setCharacterEncoding(charset);       //post 방식으로 전달된 질의 문자열을 인코딩 처리하는 메소드 ,web.xml 에서 파럼 태그를 사용하여 가져오면 유지보수성이 좋음
-
 		String url = request.getRequestURI();		//url 에서 key를 추출하는 코드 
 		String contextPath = request.getContextPath();
 		String path = url.substring(contextPath.length());

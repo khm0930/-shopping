@@ -6,13 +6,12 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.shop.dao.MemberDAO;
 import com.shop.service.MemberService;
 import com.shop.vo.MemberVO;
 
 public class LoginController implements Controller {
-    private ServletRequest session;
 
 	@Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -20,7 +19,8 @@ public class LoginController implements Controller {
     	String id = request.getParameter("id");
     	String passwd= request.getParameter("passwd");
     	String name = request.getParameter("name");
-    	
+    	//String id = (String)session.getAttribute("id");
+    	//String passwd= (String)session.getAttribute("passwd");
 		
     	
     	if (id.isEmpty() || passwd.isEmpty() ) {
@@ -28,18 +28,29 @@ public class LoginController implements Controller {
 			HttpUtil.forward(request, response, "/memberlogin.jsp");
 			return;
 		}
-    	
+    	HttpSession session = request.getSession();
     	
 		
 		MemberService loginservice = MemberService.getInstance();
 		MemberVO member = loginservice.memberLogin(id,passwd);
-		
+	
+		if(session.isNew()||session.getAttribute("id")==null) {
+			session.setAttribute("id",  id);
+			request.setAttribute("member", member);
+			System.out.print("login");
+		}
 		if (member == null) request.setAttribute("result", "아이디나 비밀번호를 다시 입력하세요.");
-		//로그인이 성공 되면 member 객체가 넘어오고 실패하면 null이 넘어옴
+		
+		/*request.setAttribute("member", member);
+		request.setAttribute("name", name); 
+		request.setAttribute("id", id);*/ 		// id 값을 저장한후 페이지 이동
+		HttpUtil.forward(request, response, "/result/memberLoginOutput.jsp");
+		
+		//로그인이 성공 되면 member 객체가 넘어오vb 고 실패하면 null이 넘어옴
 		
 		//session = null;
-		//session.setAttribute("member",member);
-		request.setAttribute("member", member);
+		//session.setAttribute("id",id);
+		//session.setAttribute("passwd",passwd);
 		//if (result==-2) request.setAttribute("result", "아이디나 비밀번호를 다시 입력하세요.");
 		//request.setAttribute("member", member);
 		
@@ -50,10 +61,6 @@ public class LoginController implements Controller {
 		
 		
 		
-		
-		request.setAttribute("name", name); 
-		request.setAttribute("id", id); 		// id 값을 저장한후 페이지 이동
-		HttpUtil.forward(request, response, "/result/memberLoginOutput.jsp");
 
 		
 	}

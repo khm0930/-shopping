@@ -70,6 +70,7 @@ public class ItemDAO {
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				item = new ItemVO();
+				item.setitem_id(rs.getString(1));
 				item.setName(rs.getString(2));
 				item.setPrice(rs.getString(3));
 				item.setSize(rs.getString(4));
