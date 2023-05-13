@@ -30,7 +30,8 @@ public class FrontController extends HttpServlet {    //컨트롤러를 서블�
 		list.put("/memberList.do", new MemberListController());
 		list.put("/memberlogin.do", new LoginController());
 		list.put("/itemList.do", new ItemlistController());
-		list.put("/orderform.do", new OrderDetailController());
+		list.put("/orderDetail.do", new OrderDetailController());
+		list.put("/order.do", new OrderController());
 
 	}
 

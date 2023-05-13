@@ -17,5 +17,13 @@ public class ItemService {
 		ArrayList<ItemVO> list = dao.ItemList();
 		return list;
 	}
-	
+	public int getPrice(int itemId) {
+	    ItemVO item = dao.getItem(itemId);
+	    return item.getPrice();
+	}
+	public ItemVO getItem(int itemId) {
+	    ItemVO item = dao.getItem(itemId);
+	    return item;
+	}
+
 }

@@ -72,7 +72,7 @@ public class MemberItemDAO {
 			conn = connect();
 			pstmt = conn.prepareStatement("insert into orders values(auto.nextval,?,?,?)");
 			pstmt.setString(1, member.getcustomers_id());
-			pstmt.setString(2, member.gettotal_price());
+			pstmt.setInt(2, member.gettotal_price());
 			pstmt.setString(3, member.getdelivery_date());
 
 			pstmt.executeUpdate();

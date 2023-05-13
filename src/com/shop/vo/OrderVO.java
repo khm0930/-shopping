@@ -1,23 +1,35 @@
 package com.shop.vo;
+
+import java.util.HashMap;
+import java.util.Map;
+
 // 회원에 대한 정보들을 저장할 목적으로 만든 객체
 public class OrderVO {    
-	
-	private String order_id;
-	private String customers_id;
-	private String total_price;
-	private String delivery_date;
 
-	
-	
-	
-	public String getorder_id() {
+	private int order_id;
+	private String customers_id;
+	private int total_price;
+	private String delivery_date;
+	private Map<Integer, Integer> itemMap;
+	private String name;
+	private String address;
+	private String phone;
+	private int count;
+	private String itemname;
+	private String itemsize;
+	private Map<Integer, Integer> itemQuantityMap;
+	private Map<Integer, Integer> itemTotalPriceMap;
+	private int itemId;
+
+
+	public int getorder_id() {
 		return order_id;
 	}
 
-	public void setorder_id(String order_id) {
+	public void setorder_id(int order_id) {
 		this.order_id = order_id;
 	}
-	
+
 	public String getcustomers_id() {
 		return customers_id;
 	}
@@ -25,12 +37,12 @@ public class OrderVO {
 	public void setcustomers_id(String customers_id) {
 		this.customers_id = customers_id;
 	}
-	
-	public String gettotal_price() {
+
+	public int gettotal_price() {
 		return total_price;
 	}
-	
-	public void settotal_price(String total_price) {
+
+	public void settotal_price(int total_price) {
 		this.total_price = total_price;
 	}
 	public String getdelivery_date() {
@@ -41,4 +53,80 @@ public class OrderVO {
 		this.delivery_date = delivery_date;
 	}
 
+	public Map<Integer, Integer> getItemMap() {
+		if(itemMap ==null) {
+			itemMap= new HashMap<>();
+		}    
+		return itemMap;
+	}
+	public Map<Integer, Integer> getItemQuantityMap() {
+		if(itemQuantityMap ==null) {
+			itemQuantityMap= new HashMap<>();
+		}    
+		return itemQuantityMap;
+	}
+	public void setItemQuantityMap(Map<Integer, Integer> itemQuantityMap) {
+		this.itemQuantityMap = itemQuantityMap;
+	}
+
+	public Map<Integer, Integer> getItemTotalPriceMap() {
+		if(itemTotalPriceMap ==null) {
+			itemTotalPriceMap= new HashMap<>();
+		}    
+		return itemTotalPriceMap;
+	}
+	public void setItemTotalPriceMap(Map<Integer, Integer> itemTotalPriceMap) {
+		this.itemTotalPriceMap = itemTotalPriceMap;
+	}
+
+	public String getName() {
+		// TODO Auto-generated method stub
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getAddress() {
+		// TODO Auto-generated method stub
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getPhone() {
+		// TODO Auto-generated method stub
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public int getCount() {
+		// TODO Auto-generated method stub
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
+	public String getitemName() {
+		// TODO Auto-generated method stub
+		return itemname;
+	}
+	public void setitemName(String itemname) {
+		this.itemname = itemname;
+	}
+	public String getitemSize() {
+		// TODO Auto-generated method stub
+		return itemsize;
+	}
+	public void setitemSize(String itemsize) {
+		this.itemsize = itemsize;
+	}
+	public int getItemId() {
+		return itemId;
+	}
+
+	public void setItemId(int itemId) {
+		this.itemId = itemId;
+	}
 }

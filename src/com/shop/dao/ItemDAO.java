@@ -56,8 +56,8 @@ public class ItemDAO {
 		}
 	}
 	public ArrayList<ItemVO> ItemList() {
-
 		ArrayList<ItemVO> list = new ArrayList<ItemVO>();
+		
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -70,9 +70,9 @@ public class ItemDAO {
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				item = new ItemVO();
-				item.setitem_id(rs.getString(1));
+				item.setItem_id(rs.getInt(1));
 				item.setName(rs.getString(2));
-				item.setPrice(rs.getString(3));
+				item.setPrice(rs.getInt(3));
 				item.setSize(rs.getString(4));
 				list.add(item);
 				
@@ -87,5 +87,33 @@ public class ItemDAO {
 		return list;
 	}
 	
+	public ItemVO getItem(int itemId) {
+	    Connection conn = null;
+	    PreparedStatement pstmt = null;
+	    ResultSet rs = null;
+	    ItemVO item = null;
+
+	    try {
+	    	conn = connect();
+	        String sql = "SELECT * FROM item WHERE item_id=?";
+	        pstmt = conn.prepareStatement(sql);
+	        pstmt.setInt(1, itemId);
+	        rs = pstmt.executeQuery();
+
+	        if (rs.next()) {
+	            item = new ItemVO();
+	            item.setItem_id(rs.getInt("item_id"));
+	            item.setName(rs.getString("item_name"));
+	            item.setPrice(rs.getInt("price"));
+	            item.setSize(rs.getString("item_size"));
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        close(conn, pstmt, rs);
+	    }
+
+	    return item;
+	}
 
 }
