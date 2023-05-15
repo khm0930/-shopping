@@ -2,6 +2,8 @@ package com.shop.vo;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.sql.Date;
+import java.time.LocalDate;
 
 // 회원에 대한 정보들을 저장할 목적으로 만든 객체
 public class OrderVO {    
@@ -9,7 +11,8 @@ public class OrderVO {
 	private int order_id;
 	private String customers_id;
 	private int total_price;
-	private String delivery_date;
+	private LocalDate delivery_date;
+	private LocalDate order_date;
 	private Map<Integer, Integer> itemMap;
 	private String name;
 	private String address;
@@ -17,6 +20,7 @@ public class OrderVO {
 	private int count;
 	private String itemname;
 	private String itemsize;
+	private int itemprice;
 	private Map<Integer, Integer> itemQuantityMap;
 	private Map<Integer, Integer> itemTotalPriceMap;
 	private int itemId;
@@ -38,19 +42,26 @@ public class OrderVO {
 		this.customers_id = customers_id;
 	}
 
-	public int gettotal_price() {
+	public int getTotalPrice() {
 		return total_price;
 	}
 
-	public void settotal_price(int total_price) {
+	public void setTotalPrcie(int total_price) {
 		this.total_price = total_price;
 	}
-	public String getdelivery_date() {
+	public LocalDate getDeliveryDate() {
 		return delivery_date;
 	}
 
-	public void setdelivery_date(String delivery_date) {
+	public void setDeliveryDate(LocalDate delivery_date) {
 		this.delivery_date = delivery_date;
+	}
+	public LocalDate getOrderDate() {
+		return order_date;
+	}
+
+	public void setOrderDate(LocalDate date) {
+		this.order_date = date;
 	}
 
 	public Map<Integer, Integer> getItemMap() {
@@ -128,5 +139,12 @@ public class OrderVO {
 
 	public void setItemId(int itemId) {
 		this.itemId = itemId;
+	}
+	public int getitemPrice() {
+		return itemprice;
+	}
+
+	public void setitemPrice(int itemprice) {
+		this.itemprice = itemprice;
 	}
 }

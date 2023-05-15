@@ -16,11 +16,14 @@
 <body>
 
 
-    <form action="order.do" method="post">
+    <form action="orderHistory.do" method="post">
+    	<% int total = 0; %>
+    	
         <% String orderId = (String) request.getAttribute("orderId"); %>
         <% Set<Integer> printedItems = new HashSet<>();%>
         <% ArrayList<OrderVO> list = (ArrayList<OrderVO>) request.getAttribute("order"); 
            if (list != null && !list.isEmpty()) { %>
+        <h1>장바구니</h1> <!-- 헤더 추가 -->
         <table border="1">
             <tr>
                 <th>옷</th>
@@ -37,6 +40,7 @@
                         ItemVO itemDetails = ItemService.getInstance().getItem(itemId);
                         if (itemDetails != null && !printedItems.contains(itemId)) { // 아이템 정보가 유효한 경우에만 출력
                         	printedItems.add(itemId); //중복되는것은 출력하지 않기
+                        	total = total+itemTotalPriceMap.get(itemId);
             %>
             <tr>
                 <td><%= itemDetails.getName() %></td>
@@ -49,7 +53,9 @@
         <% } else { %>
         <p>주문 내역이 없습니다.</p>
         <% } %>
-        <input type="submit" value="주문하기">
+        <p>총액: <%= total %>원</p>
+        <input type="submit" value="주문하기"> <br>
+        <a href="memberLogOut.jsp">로그아웃</a> <p>
     </form>
 </body>
 </html>

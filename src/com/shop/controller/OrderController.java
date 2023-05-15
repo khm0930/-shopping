@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
+import java.time.LocalDate;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -44,6 +45,7 @@ public class OrderController implements Controller {
 		
 		
 		Enumeration<String> parameterNames = request.getParameterNames();
+		OrderVO orderItem = new OrderVO(); 	
 		
 		while (parameterNames.hasMoreElements()) {
 			String paramName = parameterNames.nextElement();
@@ -51,14 +53,16 @@ public class OrderController implements Controller {
 				itemId = Integer.parseInt(paramName.substring(6));
 				count = Integer.parseInt(request.getParameter(paramName));
 				int itemPrice = ItemService.getInstance().getPrice(itemId);
-		        total = total+(count * itemPrice);
+				 int totalPrice = itemPrice * count;
+				total = total+totalPrice;
+				System.out.println("total:" + total);
 		        itemMap.put(itemId, count);
 			}
 		}
+		orderItem.setTotalPrcie(total);
 		int quantity=0;
 		int itemPrice=0;
 		int totalPrice=0;
-		OrderVO orderItem = new OrderVO(); 	
 		for (Map.Entry<Integer, Integer> entry : itemMap.entrySet()) {
 			itemId = entry.getKey();
 			quantity = entry.getValue();
@@ -71,7 +75,6 @@ public class OrderController implements Controller {
 		    orderItem.setItemQuantityMap(itemQuantityMap);
 		    orderItem.setItemTotalPriceMap(itemTotalPriceMap);
 		    orderItem.setItemId(itemId);
-		    orderItem.settotal_price(total);
 		    
 		    ItemVO item = ItemService.getInstance().getItem(itemId);
 		    orderItem.setitemName(item.getName());
@@ -83,10 +86,16 @@ public class OrderController implements Controller {
 
 
 		}
+		LocalDate currentDate = LocalDate.now();
+		LocalDate futureDate = currentDate.plusDays(2);
 		orderItem.setName(name);
 		orderItem.setAddress(address);
 		orderItem.setPhone(phone);
-		System.out.println("total:" + total);
+		orderItem.setOrderDate(currentDate);
+		orderItem.setDeliveryDate(futureDate);
+		
+		System.out.println("deliveryDate:" + currentDate);
+		System.out.println("OrderDate:" + futureDate);
 		service.saveOrder(id,orderItem,itemMap);
 
 		// 결제 페이지로 이동

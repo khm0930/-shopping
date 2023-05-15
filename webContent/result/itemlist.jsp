@@ -26,11 +26,8 @@ function fnCalCount(type){
 <body>
 
 
+	 <h1>상품 목록</h1> <!-- 헤더 추가 -->
 	<form action="order.do"  method="post"">
-	  <input type="text" name="name" placeholder="이름">
-    <input type="text" name="address" placeholder="주소">
-    <input type="text" name="phone" placeholder="전화번호">
-<% String orderId = (String) request.getAttribute("orderId"); %>
 
 	<%  ArrayList<ItemVO> list = (ArrayList<ItemVO>) request.getAttribute("list"); 
     if(!list.isEmpty()) {  %>
@@ -64,8 +61,12 @@ function fnCalCount(type){
        }
 	%>
 	</table>
-	
-		<input type="submit"  value="장바구니 담기" >
+	 <h2>배송 정보</h2> <!-- 헤더 추가 -->
+	  <input type="text" name="name" placeholder="이름">
+    <input type="text" name="address" placeholder="주소">
+    <input type="text" name="phone" placeholder="전화번호"> <br>
+		<input type="submit"  value="장바구니 담기" > <br>
+		<a href="memberLogOut.jsp">로그아웃</a> <p>
 	</form>
 
 

@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Date;
+import java.time.LocalDate;
 
 import com.shop.vo.ItemVO;
 import com.shop.vo.OrderDetailVO;
@@ -65,7 +67,7 @@ public class OrderDAO {
 		}
 	} // close
 
-	public void insertorders(OrderVO member) {
+	/*public void insertorders(OrderVO member) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ArrayList<OrderVO> order = new ArrayList<OrderVO>();
@@ -75,8 +77,8 @@ public class OrderDAO {
 			conn = connect();
 			pstmt = conn.prepareStatement("insert into orders values(auto.nextval,?,?,?)");
 			pstmt.setString(1, member.getcustomers_id());
-			pstmt.setInt(2, member.gettotal_price());
-			pstmt.setString(3, member.getdelivery_date());
+			pstmt.setInt(2, member.getTotalPrice());
+			pstmt.setLocalDate(3, member.getDeliveryDate());
 
 			pstmt.executeUpdate();
 		} catch (Exception ex) {
@@ -84,7 +86,7 @@ public class OrderDAO {
 		} finally {
 			close(conn, pstmt);
 		}
-	}
+	}*/
 
 
 
@@ -141,6 +143,7 @@ public class OrderDAO {
 	}
 
 	
+	OrderVO order2 = new OrderVO();
 	public void saveOrder(String id, OrderVO order,Map<Integer, Integer> itemMap) {
 		// 데이터베이스 연결
 		Connection conn = null;
@@ -148,7 +151,6 @@ public class OrderDAO {
 		PreparedStatement pstmt0 = null;
 		PreparedStatement pstmt1 = null;
 		PreparedStatement pstmt2 = null;
-		PreparedStatement pstmt3 = null;
 		int customerId = -1;
 
 		try {
@@ -173,17 +175,19 @@ public class OrderDAO {
 			pstmt1.setString(4, order.getPhone());
 			pstmt1.executeUpdate();
 			*/
-			String sql5 = "{call INSERT_ORDER (?, ?, ?, ?, ?)}";
+			String sql5 = "{call INSERT_ORDER (?, ?, ?, ?, ?, ?, ?, ?)}";
 			CallableStatement cstmt1 = conn.prepareCall(sql5);
 			cstmt1.setInt(1, customerId);
-			cstmt1.setString(2, order.getName());
-			cstmt1.setString(3, order.getAddress());
-			cstmt1.setString(4, order.getPhone());
-			cstmt1.registerOutParameter(5, java.sql.Types.NUMERIC);
+			cstmt1.setInt(2, order.getTotalPrice());
+			cstmt1.setDate(3, java.sql.Date.valueOf(order.getDeliveryDate()));
+			cstmt1.setString(4, order.getName());
+			cstmt1.setString(5, order.getAddress());
+			cstmt1.setString(6, order.getPhone());
+			cstmt1.setDate(7, java.sql.Date.valueOf(order.getOrderDate()));
+			cstmt1.registerOutParameter(8, java.sql.Types.NUMERIC); //출력 매개변수를 사용 주문번호 id를 갖고오기 위해
 			cstmt1.executeUpdate();
 
-			OrderVO order2 = new OrderVO();
-			order2.setorder_id(cstmt1.getInt(5));
+			order2.setorder_id(cstmt1.getInt(8));
 			System.out.println("order_id: " + order2.getorder_id());
 			int itemId;
 			int count;
@@ -256,7 +260,45 @@ public class OrderDAO {
 
 		return list;
 	}
+	
+	public ArrayList<OrderVO> OrderHistoryList() {
 
+		ArrayList<OrderVO> list = new ArrayList<OrderVO>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		OrderVO order = null;
+		ItemVO item = null;
+
+		try {
+			conn = connect();
+			pstmt = conn.prepareStatement("SELECT o.ordername, o.orderaddress, o.order_date, o.delivery_date, o.total_price, i.item_name,i.item_size,i.price, orf.count FROM orders o JOIN orders_form orf ON o.order_id = orf.order_id JOIN item i ON orf.item_id = i.item_id WHERE o.order_id = ?"); //아이템 id, 아이템 수량, 아이템 총 가격 필요하므로 orders_form 테이블, item 테이블 필요 
+			System.out.println("order_id: " + order2.getorder_id());
+			pstmt.setInt(1,order2.getorder_id());
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				order = new OrderVO();
+				order.setName(rs.getString(1));
+				order.setAddress(rs.getString(2));
+				order.setOrderDate(rs.getDate(3).toLocalDate());
+				order.setDeliveryDate(rs.getDate(4).toLocalDate());
+				order.setTotalPrcie(rs.getInt(5));
+				order.setitemName(rs.getString(6));
+				order.setitemSize(rs.getString(7));
+				order.setitemPrice(rs.getInt(8));
+				order.setCount(rs.getInt(9));
+				list.add(order);
+				
+			} 
+
+		} catch (Exception ex) {
+			System.out.println("list error " + ex);
+		} finally {
+			close(conn, pstmt, rs);
+		}
+
+		return list;
+	}
 
 
 

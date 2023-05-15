@@ -94,7 +94,7 @@ public class ItemDAO {
 	    ItemVO item = null;
 
 	    try {
-	    	conn = connect();
+	        conn = connect(); // 데이터베이스 연결
 	        String sql = "SELECT * FROM item WHERE item_id=?";
 	        pstmt = conn.prepareStatement(sql);
 	        pstmt.setInt(1, itemId);
@@ -110,10 +110,9 @@ public class ItemDAO {
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    } finally {
-	        close(conn, pstmt, rs);
+	        close(conn, pstmt, rs); // 리소스 해제
 	    }
 
 	    return item;
 	}
-
 }

@@ -62,26 +62,6 @@ public class OrderHistoryDAO {
 		}
 	} // close
 
-	public void insertorders(OrderVO member) {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ArrayList<OrderVO> order = new ArrayList<OrderVO>();
-		try {
-
-
-			conn = connect();
-			pstmt = conn.prepareStatement("insert into orders values(auto.nextval,?,?,?)");
-			pstmt.setString(1, member.getcustomers_id());
-			pstmt.setInt(2, member.gettotal_price());
-			pstmt.setString(3, member.getdelivery_date());
-
-			pstmt.executeUpdate();
-		} catch (Exception ex) {
-			System.out.println("insert error : " + ex);
-		} finally {
-			close(conn, pstmt);
-		}
-	}
 
 
 	public ArrayList<OrderHistoryVO> Orders_form() {
@@ -160,4 +140,37 @@ public class OrderHistoryDAO {
 		}
 		return orderHistoryData;
 	}
+	
+	public ArrayList<OrderVO> OrderList() {
+
+		ArrayList<OrderVO> list = new ArrayList<OrderVO>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		OrderVO order = null;
+		ItemVO item = null;
+
+		try {
+			conn = connect();
+			pstmt = conn.prepareStatement("select i.item_name,i.item_size,odf.count from orders_form odf NATURAL JOIN item i"); //아이템 id, 아이템 수량, 아이템 총 가격 필요하므로 orders_form 테이블, item 테이블 필요 
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				order = new OrderVO();
+				order.setitemName(rs.getString(1));
+				order.setitemSize(rs.getString(2));
+				order.setCount(rs.getInt(3));
+				//order.settotal_price(rs.getInt(4));
+				list.add(order);
+				
+			} 
+
+		} catch (Exception ex) {
+			System.out.println("list error " + ex);
+		} finally {
+			close(conn, pstmt, rs);
+		}
+
+		return list;
+	}
+
 }

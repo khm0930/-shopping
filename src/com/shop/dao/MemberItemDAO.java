@@ -62,26 +62,6 @@ public class MemberItemDAO {
 		}
 	} // close
 
-	public void insertorders(OrderVO member) {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ArrayList<OrderVO> order = new ArrayList<OrderVO>();
-		try {
-
-
-			conn = connect();
-			pstmt = conn.prepareStatement("insert into orders values(auto.nextval,?,?,?)");
-			pstmt.setString(1, member.getcustomers_id());
-			pstmt.setInt(2, member.gettotal_price());
-			pstmt.setString(3, member.getdelivery_date());
-
-			pstmt.executeUpdate();
-		} catch (Exception ex) {
-			System.out.println("insert error : " + ex);
-		} finally {
-			close(conn, pstmt);
-		}
-	}
 
 
 	public ArrayList<OrderDetailVO> Orders_form() {
