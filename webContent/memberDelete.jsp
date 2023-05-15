@@ -13,7 +13,7 @@ ${error}
   <input type="submit"  value="확인" />
     <input type="hidden" name="job" value="delete" />
 </form>
-
+<% session.invalidate(); %>
 <% MemberVO member = (MemberVO)request.getAttribute("member");
    if(member != null) { %>
 		<h3>검색 정보 결과</h3>

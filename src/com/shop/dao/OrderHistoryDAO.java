@@ -9,7 +9,6 @@ import java.util.List;
 
 import com.shop.vo.ItemVO;
 import com.shop.vo.MemberVO;
-import com.shop.vo.OrderDetailVO;
 import com.shop.vo.OrderHistoryVO;
 import com.shop.vo.OrderVO;
 
@@ -95,23 +94,6 @@ public class OrderHistoryDAO {
 		return list;
 	}
 
-	public void insertordersform(OrderDetailVO member) {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-
-		try {
-			conn = connect();
-			pstmt = conn.prepareStatement("insert into orders_form(order_id,item_id,count) values(?,?,?)");
-			pstmt.setString(1, member.getorder_id());
-			pstmt.setString(2, member.getitem_id());
-			pstmt.setInt(3, member.getcount());
-			pstmt.executeUpdate();
-		} catch (Exception ex) {
-			System.out.println("insert error : " + ex);
-		} finally {
-			close(conn, pstmt);
-		}
-	}
 
 	public List<OrderHistoryVO> getOrderHistoryData() { //ORDER 마지막 페이지
 		List<OrderHistoryVO> orderHistoryData = new ArrayList<OrderHistoryVO>();

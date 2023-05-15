@@ -9,7 +9,6 @@ import java.util.List;
 
 import com.shop.vo.ItemVO;
 import com.shop.vo.MemberVO;
-import com.shop.vo.OrderDetailVO;
 import com.shop.vo.OrderHistoryVO;
 import com.shop.vo.OrderVO;
 
@@ -62,56 +61,6 @@ public class MemberItemDAO {
 		}
 	} // close
 
-
-
-	public ArrayList<OrderDetailVO> Orders_form() {
-
-		ArrayList<OrderDetailVO> list = new ArrayList<OrderDetailVO>();
-
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		OrderDetailVO item = null;
-
-		try {
-			conn = connect();
-			pstmt = conn.prepareStatement("select * from item NATURAL JOIN Orders_form NATURAL JOIN Orders");
-			rs = pstmt.executeQuery();
-			while (rs.next()) {
-				item = new OrderDetailVO();
-				//item.setitem_name(rs.getString(1)); //orderdetailvo에 아직 추가 안했음
-				//item.setitem_size(rs.getString(2));
-				item.setcount(rs.getInt(3));
-				list.add(item);
-
-			} 
-
-		} catch (Exception ex) {
-			System.out.println("list error " + ex);
-		} finally {
-			close(conn, pstmt, rs);
-		}
-
-		return list;
-	}
-
-	public void insertordersform(OrderDetailVO member) {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-
-		try {
-			conn = connect();
-			pstmt = conn.prepareStatement("insert into orders_form(order_id,item_id,count) values(?,?,?)");
-			pstmt.setString(1, member.getorder_id());
-			pstmt.setString(2, member.getitem_id());
-			pstmt.setInt(3, member.getcount());
-			pstmt.executeUpdate();
-		} catch (Exception ex) {
-			System.out.println("insert error : " + ex);
-		} finally {
-			close(conn, pstmt);
-		}
-	}
 
 	public List<OrderHistoryVO> getOrderHistoryData() { //ORDER 마지막 페이지
 		List<OrderHistoryVO> orderHistoryData = new ArrayList<OrderHistoryVO>();

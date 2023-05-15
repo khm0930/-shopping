@@ -17,7 +17,7 @@ ${error}
 </form>
 
 
-
+<% session.invalidate(); %>
 <% MemberVO member = (MemberVO)request.getAttribute("member");
    if(member != null) { %>
 		<h3>회원 정보 수정 </h3>
